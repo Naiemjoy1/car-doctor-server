@@ -10,7 +10,11 @@ const port = process.env.PORT || 3000;
 // middleware
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "https://cars-doctor-3223b.web.app",
+      "https://cars-doctor-3223b.firebaseapp.com",
+    ],
     credentials: true,
   })
 );
@@ -78,7 +82,7 @@ async function run() {
     });
 
     // services related api
-    app.get("/service", logger, async (req, res) => {
+    app.get("/service", async (req, res) => {
       const cursor = serviceCollection.find();
       const result = await cursor.toArray();
       res.send(result);
